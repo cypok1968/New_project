@@ -1,21 +1,49 @@
-# OOП (magic methods)
+# OOП (inheritance)
+# класс, от которого наследуем: базовый, родительский, суперкласс
+# класс, который наследуется: производный, дочерний
+class Rectangle:
+    def __init__(self, width, height):
+        self.width = width
+        self.height = height
+        self.name = 'прямоугольник'
+
+    def perimetr(self):
+        return 2 * (self.width + self.height)
+
+    def area(self):
+        return self.width * self.height
+
+    def get_name(self):
+        return self.name
+
+
+class Square(Rectangle):
+    def __init__(self, side):
+        super().__init__(side, side)
+        self.name = 'квадрат'
+
+
+s = Square(5)
+print(s.area())
+print(s.perimetr())
+print(s.get_name())
+
 # method override; operator overloading
 # __call__ - экземпляр класса становится вызываемым
 # (как функция)
 # y = ax^2 + bx + c
-
-class SquareFunction:
-    def __init__(self, a, b, c):
-        self.a = a
-        self.b = b
-        self.c = c
-
-    def __call__(self, x):
-        return self.a * x ** 2 + self.b * x + self.c
-
-
-s = SquareFunction(1, 2, 3)
-print(s(2))
+# class SquareFunction:
+#     def __init__(self, a, b, c):
+#         self.a = a
+#         self.b = b
+#         self.c = c
+#
+#     def __call__(self, x):
+#         return self.a * x ** 2 + self.b * x + self.c
+#
+#
+# s = SquareFunction(1, 2, 3)
+# print(s(2))
 
 # class MyTime:
 #     def __init__(self, minutes, seconds):

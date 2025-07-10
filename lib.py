@@ -15,37 +15,6 @@ class Circle:
     def get_name(self):
         return self.name
 
-
-class Square:
-    def __init__(self, side):
-        self.side = side
-        self.name = 'квадрат'
-
-    def perimetr(self):
-        return 4 * self.side
-
-    def area(self):
-        return self.side ** 2
-
-    def get_name(self):
-        return self.name
-
-
-class Rectangle:
-    def __init__(self, width, height):
-        self.width = width
-        self.height = height
-        self.name = 'прямоугольник'
-
-    def perimetr(self):
-        return 2 * (self.width + self.height)
-
-    def area(self):
-        return self.width * self.height
-
-    def get_name(self):
-        return self.name
-
 # Книги
 class Book:
     def __init__(self, title, author):
