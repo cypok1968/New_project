@@ -1,20 +1,3 @@
-from math import pi
-
-# Фигуры
-class Circle:
-    def __init__(self, radius):
-        self.radius = radius
-        self.name = 'круг'
-
-    def perimetr(self):
-        return round(2 * pi * self.radius, 2)
-
-    def area(self):
-        return round(pi * self.radius ** 2, 2)
-
-    def get_name(self):
-        return self.name
-
 # Книги
 class Book:
     def __init__(self, title, author):
