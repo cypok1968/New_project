@@ -1,3 +1,23 @@
+# Периодические задачи
+import schedule
+import datetime
+
+i = 1
+
+
+def job():
+    global i
+    print(f'Скрипт запустился {i}-раз')
+    i += 1
+    t = datetime.datetime.now()
+    print('Время:', t.strftime('%H:%M:%S'))
+
+
+schedule.every(3).seconds.do(job)
+
+while True:
+    schedule.run_pending()
+
 # Протоколы
 
 # Transmission Control Protocol (TCP) — протокол управления передачей
@@ -14,16 +34,16 @@
 # URL - Uniform Resource Locator
 # http(s)://домен.зона/page1/?param1=value1&param2=value2
 # ../font/
-import sys
-
-print('Я', sys.argv[0], 'и мой аргумент', sys.argv[1])
-
-if len(sys.argv) >= 2:
-    match sys.argv[1]:
-        case 'p':
-            print('Привет')
-        case 'g':
-            print('Пока')
-        case _:
-            print('Не понял')
-
+# import sys
+#
+# print('Я', sys.argv[0], 'и мой аргумент', sys.argv[1])
+#
+# if len(sys.argv) >= 2:
+#     match sys.argv[1]:
+#         case 'p':
+#             print('Привет')
+#         case 'g':
+#             print('Пока')
+#         case _:
+#             print('Не понял')
+#
