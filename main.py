@@ -1,6 +1,23 @@
+# JSON - (Java Script Object Notation)
+# Для чтения:
+# load() - читает из файла
+# loads() - читает строковое представление
+import json
+
+with open('dogs.json', 'rt') as d:
+    # data = json.load(d) # Напрямую из файла
+    temp = d.read()  # читаем файл как строку
+    data = json.loads(temp)  # строковое представление JSON
+
+for k, v in data.items():
+    if type(v) == list:
+        print(f'{k}: {', '.join(v)}')
+    else:
+        print(f'{k}: {v}')
+
 # Zip
-from zipfile import ZipFile
-import os
+# from zipfile import ZipFile
+# import os
 
 # csv_files = [f for f in os.listdir() if f.endswith('.csv')]
 # # print(csv_files)
@@ -8,15 +25,15 @@ import os
 #     for file in csv_files:
 #         myzip.write(file)
 #         os.remove(file)
-files_to_extract = ['people.csv', 'file.csv']
-
-# Распаковать
+# files_to_extract = ['people.csv', 'file.csv']
+#
+# # Распаковать
+# # with ZipFile('archive.zip', 'r') as zip_obj:
+# #     zip_obj.extractall(members=files_to_extract)
+#
+# # Получить список
 # with ZipFile('archive.zip', 'r') as zip_obj:
-#     zip_obj.extractall(members=files_to_extract)
-
-# Получить список
-with ZipFile('archive.zip', 'r') as zip_obj:
-    print(zip_obj.namelist())
+#     print(zip_obj.namelist())
 
 
 # CSV-файлы (strptime)
