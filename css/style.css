@@ -15,5 +15,11 @@ color: yellow;
 }
 
 ul>li {
-color: yellow;
+color: gray;
+}
+
+#alive {
+    font-family: 'Arial';
+    font-size: 26pt;
+    text-align: center;
 }
