@@ -97,3 +97,23 @@ FROM films
 GROUP BY year HAVING Кол_во > 500
 ORDER BY Кол_во DESC
 ```
+# Добавление записи в таблицу users
+```
+INSERT INTO 
+users(name, age)
+VALUES('Tom', 20),
+('Tim', 41)
+```
+
+# Изменение возраста в записи users
+```
+UPDATE users
+SET age=22
+WHERE id=2
+```
+
+# Удалить в users тех, кто старше 30 лет 
+```
+DELETE from users
+WHERE age > 30
+```
