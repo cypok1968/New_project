@@ -8,12 +8,17 @@
     <title>Форма регистрации</title>
 </head>
 <body>
-<h1>Регистрация в системе</h1>
+<h1 class="login_form">Регистрация в системе</h1>
 <div>
     <form class="login_form" method="post">
-        <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Введите E-mail"
-               name="email">
-        <input type="password" class="form-control" id="password" placeholder="Введите пароль" name="password">
+        <div style="margin-bottom: 15px;">
+            <input type="email" class="form-control" id="email" aria-describedby="emailHelp"
+                   placeholder="Введите E-mail" value="a@b.ru"
+                   name="email">
+        </div>
+        <div>
+            <input type="password" class="form-control" id="password" placeholder="Введите пароль" name="password">
+        </div>
         <label for="levelSelect">Уровень владения ПК</label>
         <select class="form-control" name="level" id="levelSelect">
             <option>Высокий</option>
@@ -41,7 +46,7 @@
             <label class="form-check-label" for="acceptRules">Согласен с правилами</label>
         </div>
         <div>
-            <button type="submit" class="button button-primary">Отправить</button>
+            <input type="submit" value="Запушить" class="button button-primary">
         </div>
     </form>
 </div>
