@@ -3,6 +3,7 @@
 from fileinput import filename
 
 from flask import Flask, url_for
+import sqlite3
 
 app = Flask(__name__)
 debug = False
@@ -46,6 +47,43 @@ def sample_page():
             </body>
             </html>
     """
+
+
+@app.route('/sample-page2')
+def sample_page2():
+    with open('temp.html', 'r', encoding='utf-8') as html:
+        return html.read()
+
+
+# Так делать мы не будем
+# x = 5
+# @app.route('/1')
+# def show_num():
+#     global x
+#     x += 1
+#     return str(x)
+
+# <string> - по умолчанию строка
+# <int:number> - целое
+# <float:number> - дес. дробь
+# <path:p> - может содержать слэши для указания пути
+# <uuid:id> - строка-идентификатор (16-байт в HEX-формате)
+@app.route('/greeting/<string:user>/<int:id_num>')
+def greeting(user, id_num):
+    return f'Привет, {user} c id={id_num}'
+
+
+@app.route('/get-user/<int:id_num>')
+def get_user(id_num):
+    con = sqlite3.connect('db/movies.sqlite')
+    cur = con.cursor()
+    query = f'SELECT name FROM users WHERE trip_id={id_num}'
+    response = cur.execute(query)
+    result = response.fetchone()
+    # print(result)
+    cur.close()
+    con.close()
+    return str(result[0])
 
 
 if __name__ == '__main__':
