@@ -12,3 +12,7 @@ form.login_form {
     border: 2px solid gray;
     border-radius: 5px;
 }
+
+.error {
+color: #ff0000;
+}

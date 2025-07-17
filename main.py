@@ -7,13 +7,14 @@
 # PATCH - частичное изменение данных
 # JINJA - переменные, условия, циклы и т.д.
 import os.path
-
+from forms.loginform import LoginForm
 from flask import Flask, url_for, request, render_template
 from werkzeug.utils import secure_filename
 import sqlite3
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = 'uploads/'
+app.config['SECRET_KEY'] = 'just_secret_key'
 ALLOWED_EXTENSIONS = ['txt', 'pdf', 'zip', 'jpg', 'png']
 debug = False
 
@@ -36,8 +37,22 @@ def index():
 
 @app.route('/about')
 def about():
-    print('Вызвана функция about')
-    return 'О нас'
+    return render_template('about.html',
+                           title='Про нас')
+
+
+@app.route('/contacts')
+def contacts():
+    return render_template('contacts.html',
+                           title='Свяжитесь с нами')
+
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    form = LoginForm()
+    if form.validate_on_submit():
+        return 'Форма отправлена'
+    return render_template('login.html', title='Авторизация', form=form)
 
 
 @app.route('/countdown')
