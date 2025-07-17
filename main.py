@@ -148,10 +148,18 @@ def file_upload():
             return f'Файл {new_name} успешно загружен!'
     return "Ошибка загрузки"
 
+
 @app.route('/numbers')
 def odd_even():
     return render_template('numbers.html',
                            title='Чет-нечёт', number=2)
+
+
+@app.route('/deals')
+def printlist():
+    deal = ['Помыть посуду', 'Выгулять собаку',
+            'Снять показания счётчика', 'Сходить в магазин']
+    return render_template('printlist.html', deals=deal)
 
 
 if __name__ == '__main__':
