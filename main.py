@@ -95,7 +95,7 @@ def greeting(user, id_num):
 @app.route('/get-user/<int:id_num>')
 def get_user(id_num=None):
     if id_num is None:
-        return 'Нет номера записи'
+        return f'<a href="http://localhost:5000/get-user/{id_num}">ФИО</a>'
     con = sqlite3.connect('db/movies.sqlite')
     cur = con.cursor()
     query = f'SELECT name, city FROM users WHERE trip_id={id_num}'
