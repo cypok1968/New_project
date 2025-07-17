@@ -6,6 +6,7 @@
 # DELETE - удаляет указанные данные ("удалить")
 # PATCH - частичное изменение данных
 # JINJA - переменные, условия, циклы и т.д.
+# ORM - Object Relational Mapping
 import os.path
 from forms.loginform import LoginForm
 from flask import Flask, url_for, request, render_template
