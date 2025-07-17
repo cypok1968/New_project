@@ -11,6 +11,7 @@ import os.path
 from forms.loginform import LoginForm
 from flask import Flask, url_for, request, render_template
 from werkzeug.utils import secure_filename
+from data import db_session
 import sqlite3
 
 app = Flask(__name__)
@@ -192,4 +193,5 @@ def queue():
 
 
 if __name__ == '__main__':
+    db_session.global_init('db/news.sqlite')
     app.run(host='127.0.0.1', port=5000, debug=debug)
