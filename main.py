@@ -149,10 +149,14 @@ def file_upload():
     return "Ошибка загрузки"
 
 
-@app.route('/numbers')
-def odd_even():
+@app.route('/numbers/')
+@app.route('/numbers/<int:num>')
+def odd_even(num=None):
+    if num is None:
+        return render_template('numbers.html',
+                               title='Нет числа', number='')
     return render_template('numbers.html',
-                           title='Чет-нечёт', number=2)
+                           title='Чет-нечёт', number=num)
 
 
 @app.route('/deals')
