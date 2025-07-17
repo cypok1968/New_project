@@ -25,10 +25,12 @@ def allowed_file(filename):
 @app.route('/')
 @app.route('/index')
 def index():
-    username = 'слушатель'
+    params = {}
+    params['user'] = 'слушатель'
+    params['title'] = 'приветствие'
+    params['weather'] = 'Сегодня хорошая погода'
     return render_template('index.html',
-                           title='Приветствие',
-                           user=username)
+                           **params)
 
 
 @app.route('/about')
