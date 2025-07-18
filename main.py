@@ -7,6 +7,7 @@
 # PATCH - частичное изменение данных
 # JINJA - переменные, условия, циклы и т.д.
 # ORM - Object Relational Mapping
+# DBeaver - универсальный софт для работы с БД
 import os.path
 from sqlite3 import Error
 
@@ -14,6 +15,7 @@ from forms.loginform import LoginForm
 from flask import Flask, url_for, request, render_template
 from werkzeug.utils import secure_filename
 from data import db_session
+from data.users import User
 import sqlite3
 
 app = Flask(__name__)
@@ -214,4 +216,11 @@ def queue():
 
 if __name__ == '__main__':
     db_session.global_init('db/news.sqlite')
-    app.run(host='127.0.0.1', port=5000, debug=debug)
+    # app.run(host='127.0.0.1', port=5000, debug=debug)
+    user = User()
+    user.name = 'User2'
+    user.about = 'Данные про User2'
+    user.email = 'b@c.ru'
+    db_sess = db_session.create_session()
+    db_sess.add(user)
+    db_sess.commit()
