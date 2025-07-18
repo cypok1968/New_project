@@ -1,6 +1,7 @@
 import datetime
 import sqlalchemy
 from .db_session import SqlAlchemyBase
+from sqlalchemy import orm
 
 
 class User(SqlAlchemyBase):
@@ -20,3 +21,5 @@ class User(SqlAlchemyBase):
                                         nullable=True)
     create_data = sqlalchemy.Column(sqlalchemy.DateTime,
                                     default=datetime.datetime.now())
+
+    news = orm.relationship("News", back_populates='user')
