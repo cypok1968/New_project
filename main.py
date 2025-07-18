@@ -220,12 +220,14 @@ if __name__ == '__main__':
     # app.run(host='127.0.0.1', port=5000, debug=debug)
     db_sess = db_session.create_session()
     user = db_sess.query(User).filter(User.id == 1).first()
+    for news in user.news:
+        print(news)
     # print(user.id)
-    news = News(title='Third News', content='Third Content',
-                 is_private=False)
-    user.news.append(news)
-    # db_sess.add(news)
-    db_sess.commit()
+    # news = News(title='Third News', content='Third Content',
+    #              is_private=False)
+    # user.news.append(news)
+    # # db_sess.add(news)
+    # db_sess.commit()
     # user = User()
     # db_sess = db_session.create_session()
     # user = db_sess.query(User).filter(User.id == 1).first()
