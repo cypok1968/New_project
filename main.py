@@ -215,13 +215,24 @@ def queue():
     return render_template('vars.html', title='Стоим в очереди')
 
 
+# Вывод всех публичных новостей (is_private == False)
+@app.route('/news')
+def news():
+    db_sess = db_session.create_session()
+    all_news = db_sess.query(News).filter(News.is_private != True).all()
+    # print(all_news)
+    return render_template('news.html',
+                           title='Новости', news=all_news)
+
+
 if __name__ == '__main__':
     db_session.global_init('db/news.sqlite')
-    # app.run(host='127.0.0.1', port=5000, debug=debug)
-    db_sess = db_session.create_session()
-    user = db_sess.query(User).filter(User.id == 1).first()
-    for news in user.news:
-        print(news)
+    app.run(host='127.0.0.1', port=5000, debug=debug)
+
+    # db_sess = db_session.create_session()
+    # user = db_sess.query(User).filter(User.id == 1).first()
+    # for news in user.news:
+    #     print(news)
     # print(user.id)
     # news = News(title='Third News', content='Third Content',
     #              is_private=False)
