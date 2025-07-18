@@ -8,6 +8,8 @@
 # JINJA - переменные, условия, циклы и т.д.
 # ORM - Object Relational Mapping
 import os.path
+from sqlite3 import Error
+
 from forms.loginform import LoginForm
 from flask import Flask, url_for, request, render_template
 from werkzeug.utils import secure_filename
@@ -111,27 +113,41 @@ def greeting(user, id_num):
 @app.route('/get-user/')
 @app.route('/get-user/<int:id_num>')
 def get_user(id_num=None):
-    if id_num is None:
-        return f'<a href="http://localhost:5000/get-user/{id_num}">ФИО</a>'
-    con = sqlite3.connect('db/movies.sqlite')
-    cur = con.cursor()
-    query = f'SELECT name, city FROM users WHERE trip_id={id_num}'
-    response = cur.execute(query)
-    result = response.fetchone()
-    # print(result)
-    name, city = result
-    cur.close()
-    con.close()
-    return f'''<table border="1">
-    <tr>
-    <td>ФИО</td>
-    <td>Город</td>
-    </tr>
-    <tr>
-    <td>{name}</td>
-    <td>{city}</td>
-    </tr>
-    </table>'''
+    try:
+        # Подключение к базе данных
+        con = sqlite3.connect('db/movies.sqlite')
+        cur = con.cursor()
+
+        if id_num is None:
+            # Получение списка всех пользователей
+            query = 'SELECT trip_id, name FROM users'
+            response = cur.execute(query)
+            result = response.fetchall()
+            return render_template('get_user.html', users=result)
+
+        # Получение информации о конкретном пользователе
+        query = 'SELECT name, city, date_first FROM users WHERE trip_id=?'
+        response = cur.execute(query, (id_num,))
+        result = response.fetchone()
+
+        if result:
+            name, city, date_first = result
+            return render_template('get_user.html',
+                                   name=name,
+                                   city=city,
+                                   start=date_first)
+        else:
+            return "Пользователь не найден", 404
+
+    except Error as e:
+        return f"Произошла ошибка: {str(e)}", 500
+
+    finally:
+        # Гарантированное закрытие соединения
+        if con:
+            cur.close()
+            con.close()
+
 
 
 @app.route('/form-test', methods=['POST', 'GET'])
