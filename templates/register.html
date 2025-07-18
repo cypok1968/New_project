@@ -49,6 +49,6 @@
             </p>
         {% endfor %}
     </p>
-    <p>{{ form.submit(type="submit", class="btn btn-primary") }} {{message}}</p>
+    <p>{{ form.submit(type="submit", class="btn btn-primary") }} <span class="error">{{message}}</span></p>
 </form>
 {% endblock %}
