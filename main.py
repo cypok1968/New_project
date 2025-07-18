@@ -28,6 +28,11 @@ def allowed_file(filename):
         filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
+@app.errorhandler(404)
+def not_found(e):
+    return render_template('404.html', title='Не найдено')
+
+
 @app.route('/')
 @app.route('/index')
 def index():
@@ -147,7 +152,6 @@ def get_user(id_num=None):
         if con:
             cur.close()
             con.close()
-
 
 
 @app.route('/form-test', methods=['POST', 'GET'])
