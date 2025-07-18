@@ -20,7 +20,7 @@ from data.news import News
 from data.users import User
 from forms.loginform import LoginForm
 from forms.user import Register
-from flask_login import LoginManager, login_user
+from flask_login import LoginManager, login_user, logout_user
 
 app = Flask(__name__)
 
@@ -87,6 +87,10 @@ def login():
                                form=form)
     return render_template('login.html', title='Авторизация', form=form)
 
+@app.route('/logout')
+def logout():
+    logout_user()
+    return redirect('/')
 
 @app.route('/register', methods=['POST', 'GET'])
 def register():
