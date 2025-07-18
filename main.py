@@ -219,10 +219,9 @@ if __name__ == '__main__':
     # app.run(host='127.0.0.1', port=5000, debug=debug)
     # user = User()
     db_sess = db_session.create_session()
-    user = db_sess.query(User).filter(User.id == 2).first()
-    user.name = 'Billy'
+    db_sess.query(User).filter(User.id == 2).delete()
+    # user.set_username('John')
     db_sess.commit()
-    print(user)
     # user.name = 'User2'
     # user.about = 'Данные про User2'
     # user.email = 'b@c.ru'
