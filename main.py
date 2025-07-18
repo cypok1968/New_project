@@ -9,15 +9,16 @@
 # ORM - Object Relational Mapping
 # DBeaver - универсальный софт для работы с БД
 import os.path
+import sqlite3
 from sqlite3 import Error
 
-from data.news import News
-from forms.loginform import LoginForm
 from flask import Flask, url_for, request, render_template
 from werkzeug.utils import secure_filename
+
 from data import db_session
+from data.news import News
 from data.users import User
-import sqlite3
+from forms.loginform import LoginForm
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = 'uploads/'
@@ -96,7 +97,7 @@ def sample_page():
 
 @app.route('/sample-page2')
 def sample_page2():
-    with open('temp.html', 'r', encoding='utf-8') as html:
+    with open('old/temp.html', 'r', encoding='utf-8') as html:
         return html.read()
 
 
@@ -160,7 +161,7 @@ def get_user(id_num=None):
 @app.route('/form-test', methods=['POST', 'GET'])
 def form_test():
     if request.method == 'GET':
-        with open('form.html', 'r', encoding='utf-8') as html:
+        with open('old/form.html', 'r', encoding='utf-8') as html:
             return html.read()
     elif request.method == 'POST':
         print(request.form)
@@ -170,7 +171,7 @@ def form_test():
 @app.route('/upload', methods=['POST', 'GET'])
 def file_upload():
     if request.method == 'GET':
-        with open('upload.html', 'r', encoding='utf-8') as html:
+        with open('old/upload.html', 'r', encoding='utf-8') as html:
             return html.read()
     elif request.method == 'POST':
         # print(request.files)
