@@ -10,10 +10,9 @@
 # DBeaver - универсальный софт для работы с БД
 import os.path
 import sqlite3
-from crypt import methods
 from sqlite3 import Error
 
-from flask import Flask, url_for, request, render_template, redirect
+from flask import Flask, url_for, request, render_template, redirect, abort
 from werkzeug.utils import secure_filename
 
 from data import db_session
@@ -295,6 +294,7 @@ def news():
     return render_template('news.html',
                            title='Новости', news=all_news)
 
+
 @app.route('/newsjob', methods=['GET', 'POST'])
 @login_required
 def add_news():
@@ -311,6 +311,39 @@ def add_news():
         return redirect('/news')
     return render_template('newsjob.html',
                            title='Добавление новости',
+                           form=form)
+
+
+@app.route('/newsjob/<int:id_num>', methods=['GET', 'POST'])
+@login_required
+def edit_news(id_num):
+    form = NewsForm()
+    if request.method == 'GET':
+        db_sess = db_session.create_session()
+        news = db_sess.query(News).filter(
+            News.id == id_num, News.user == current_user
+        ).first()
+        if news:
+            form.title.data = news.title
+            form.content.data = news.content
+            form.is_private.data = news.is_private
+        else:
+            abort(404)
+    if form.validate_on_submit():
+        db_sess = db_session.create_session()
+        news = db_sess.query(News).filter(
+            News.id == id_num, News.user == current_user
+        ).first()
+        if news:
+            form.title = news.title.data
+            form.content = news.content.data
+            form.is_private = news.is_private.data
+            db_sess.commit()
+            return redirect('/news')
+        else:
+            abort(404)
+    return render_template('newsjob.html',
+                           title='Редактирование новости',
                            form=form)
 
 
