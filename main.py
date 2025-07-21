@@ -67,9 +67,13 @@ def index():
 
 
 @app.route('/about')
+@login_required
 def about():
-    return render_template('about.html',
+    if current_user.is_authenticated and current_user.is_admin():
+        return render_template('about.html',
                            title='Про нас')
+    else:
+        return 'Вы не админ'
 
 
 @app.route('/contacts')
