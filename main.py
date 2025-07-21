@@ -8,6 +8,13 @@
 # JINJA - переменные, условия, циклы и т.д.
 # ORM - Object Relational Mapping
 # DBeaver - универсальный софт для работы с БД
+# SOA - Service Oriented Architecture
+# MSA - Micro Service Architecture
+# REST - REpresentation State Transfer
+# GET - /book/page/50
+# GET - /book
+# POST - /book
+# DELETE - /book/7
 import os.path
 import sqlite3
 from sqlite3 import Error
