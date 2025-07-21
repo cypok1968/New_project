@@ -346,6 +346,21 @@ def edit_news(id_num):
                            title='Редактирование новости',
                            form=form)
 
+@app.route('/newsdel/<int:news_id>')
+@login_required
+def news_delete(news_id):
+    db_sess = db_session.create_session()
+    news = db_sess.query(News).filter(
+        News.id == news_id, News.user == current_user
+    ).first()
+
+    if news:
+        db_sess.delete(news)
+        db_sess.commit()
+    else:
+        abort(404)
+    return redirect('/news')
+
 
 if __name__ == '__main__':
     db_session.global_init('db/news.sqlite')
