@@ -15,5 +15,15 @@
         <div>Автор: {{item.user.name}}</div>
     </div>
 </div>
+{% if current_user.is_authenticated and current_user == item.user %}
+<div>
+    <a href="/newsjob/{{item.id}}" class="btn btn-warning btn-sm">
+    Изменить новость
+</a>
+<a href="/newsdel/{{item.id}}" class="btn btn-danger btn-sm">
+    Удалить новость
+</a>
+</div>
+{% endif %}
 {% endfor %}
 {% endblock %}
