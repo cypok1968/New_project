@@ -335,9 +335,9 @@ def edit_news(id_num):
             News.id == id_num, News.user == current_user
         ).first()
         if news:
-            form.title = news.title.data
-            form.content = news.content.data
-            form.is_private = news.is_private.data
+            news.title = form.title.data
+            news.content = form.content.data
+            news.is_private = form.is_private.data
             db_sess.commit()
             return redirect('/news')
         else:
