@@ -1,6 +1,7 @@
 from flask import Flask, request, make_response, redirect, session
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = 'just_secret_key'
 
 
 @app.route('/')
@@ -25,7 +26,12 @@ def cookie_test():
 
 @app.route('/session_test')
 def session_test():
-    visit_count = session.
+    visit_count = session.get('visit_count', 0)
+    print(visit_count)
+    session['visit_count'] = visit_count + 1
+    return make_response(
+        f'Вы на этой странице {visit_count + 1} раз(а)'
+    )
 
 
 if __name__ == '__main__':
