@@ -19,6 +19,7 @@ import os.path
 import sqlite3
 from sqlite3 import Error
 
+import requests
 from flask import Flask, url_for, request, render_template, redirect, abort
 from werkzeug.utils import secure_filename
 
@@ -382,6 +383,11 @@ def adminpanel():
                                news=res)
     else:
         abort(404)
+
+
+@app.route('/testapi')
+def testapi():
+    return requests.get('http://localhost:5000/api/news').json()
 
 
 if __name__ == '__main__':
