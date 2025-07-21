@@ -20,7 +20,7 @@ from data.news import News
 from data.users import User
 from forms.loginform import LoginForm
 from forms.user import Register
-from flask_login import LoginManager, login_user, logout_user
+from flask_login import LoginManager, login_user, logout_user, current_user, login_required
 
 app = Flask(__name__)
 
@@ -47,6 +47,11 @@ def load_user(user_id):
 @app.errorhandler(404)
 def not_found(e):
     return render_template('404.html', title='Не найдено')
+
+
+@app.errorhandler(401)
+def not_authorized(_):
+    return redirect('/login')
 
 
 @app.route('/')
@@ -89,6 +94,7 @@ def login():
 
 
 @app.route('/logout')
+@login_required
 def logout():
     logout_user()
     return redirect('/')
@@ -278,7 +284,11 @@ def queue():
 @app.route('/news')
 def news():
     db_sess = db_session.create_session()
-    all_news = db_sess.query(News).filter(News.is_private != True).all()
+    if current_user.is_authenticated:
+        all_news = db_sess.query(News).filter(
+            (News.user == current_user) | (News.is_private != True)).all()
+    else:
+        all_news = db_sess.query(News).filter(News.is_private != True).all()
     # print(all_news)
     return render_template('news.html',
                            title='Новости', news=all_news)
