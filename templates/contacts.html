@@ -1,6 +1,27 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1>Свяжитесь с нами!</h1>
-    <p>Наши адреса....</p>
+<h1>Свяжитесь с нами!</h1>
+<p>Наши адреса....</p>
+<div class="row">
+    <div class="col-md-8 mx-auto">
+        <div style="position:relative;overflow:hidden;"><a
+                href="https://yandex.ru/maps/2/saint-petersburg/?utm_medium=mapframe&utm_source=maps"
+                style="color:#eee;font-size:12px;position:absolute;top:0px;">Санкт‑Петербург</a><a
+                href="https://yandex.ru/maps/2/saint-petersburg/house/naberezhnaya_reki_fontanki_123_5/Z0kYdQZgS0ADQFtjfXVzcXhgZw==/?ll=30.311110%2C59.920456&utm_medium=mapframe&utm_source=maps&z=18.29"
+                style="color:#eee;font-size:12px;position:absolute;top:14px;">Набережная реки Фонтанки, 123/5 —
+            Яндекс Карты</a>
+            <iframe src="https://yandex.ru/map-widget/v1/?ll=30.311110%2C59.920456&mode=whatshere&whatshere%5Bpoint%5D=30.309918%2C59.920394&whatshere%5Bzoom%5D=17&z=18.29"
+                    width="560" height="400" frameborder="1" allowfullscreen="true" style="position:relative;"></iframe>
+        </div>
+    </div>
+</div>
+<h2>Форма обратной связи</h2>
+<form action="/sendmail" method="post">
+    <p>Ваше имя: <input type="text" name="name"></p>
+    <p>Ваш email: <input type="email" name="email"></p>
+    <p>Ваше сообщение: <textarea name="message"></textarea></p>
+    <p><input type="submit"> {{mess}}</p>
+</form>
+
 {% endblock %}
