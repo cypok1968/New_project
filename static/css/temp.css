@@ -1,0 +1,48 @@
+html, body, ul, ol {
+  margin: 0;
+  padding: 0;
+}
+
+html, body, ul, ol {
+  margin: 0;
+  padding: 0;
+}
+
+.message {
+  border: 1px solid #230a5e;
+  padding: 10px;
+  color: #169597;
+}
+
+body {
+  font: Arial, Helvetica;
+  color: #555;
+}
+
+nav ul {
+  margin: 0;
+  font: Arial, Helvetica;
+}
+nav li {
+  display: block;
+}
+
+.box {
+  -ms-transform: rotate(30deg);
+  -webkit-transform: rotate(30deg);
+  transform: rotate(30deg);
+}
+
+div {
+  -ms-transform: 60deg;
+  -webkit-transform: 60deg;
+  transform: 60deg;
+}
+
+.message {
+  display: block;
+}
+
+.container {
+  width: 50%;
+}

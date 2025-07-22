@@ -1,0 +1,10 @@
+html, body, ul, ol {
+    margin: 0;
+    padding: 0;
+}
+
+@mixin transform($property) {
+    -ms-transform: $property;
+    -webkit-transform: $property;
+    transform: $property;
+}
