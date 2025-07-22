@@ -20,7 +20,7 @@ import sqlite3
 from sqlite3 import Error
 
 import requests
-from flask import Flask, url_for, request, render_template, redirect, abort
+from flask import Flask, url_for, request, render_template, redirect, abort, make_response, jsonify
 from werkzeug.utils import secure_filename
 
 from data import db_session, news_api
@@ -50,12 +50,20 @@ def allowed_file(filename):
 @login_manager.user_loader
 def load_user(user_id):
     db_sess = db_session.create_session()
-    return db_sess.query(User).get(user_id)
+    return db_sess.get(User, user_id)
+
+
+# @app.errorhandler(404)
+# def not_found(e):
+#     return render_template('404.html', title='Не найдено')
+@app.errorhandler(400)
+def bad_request(_):
+    return make_response(jsonify({'error': 'Bad request'}), 400)
 
 
 @app.errorhandler(404)
-def not_found(e):
-    return render_template('404.html', title='Не найдено')
+def not_found(_):
+    return make_response(jsonify({'error': 'Not found'}), 404)
 
 
 @app.errorhandler(401)
@@ -387,7 +395,10 @@ def adminpanel():
 
 @app.route('/testapi')
 def testapi():
-    return requests.get('http://localhost:5000/api/news').json()
+    res = requests.get('http://localhost:5000/api/news').json()
+    return render_template('testapi.html',
+                           title='Тест API',
+                           news=res)
 
 
 if __name__ == '__main__':
@@ -418,4 +429,3 @@ if __name__ == '__main__':
     # db_sess = db_session.create_session()
     # db_sess.add(user)
     # db_sess.commit()
-
