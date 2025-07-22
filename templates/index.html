@@ -2,9 +2,26 @@
 
 {% block content %}
 {% if current_user.is_authenticated %}
+<h1>Приветствуем Вас, {{user}}!</h1>
+<p>{{weather}}</p>
+<div>
+    <p>
+        <a href="/static/zip/Живое сердце Варинии.zip" download>
+        Антуан де ла Мармот. Живое сердце Варинии.</a>
+    </p>
+</div>
+{% else %}
+<h2>Пожалуйста, авторизируйтесь!</h2>
+{% endif %}
+{% endblock %}
+
+<!-- {% extends "base.html" %}
+
+{% block content %}
+{% if current_user.is_authenticated %}
 <h1>Привет, {{user}}!</h1>
 <p>{{weather}}</p>
 {% else %}
 <h2>Сначала авторизуйтесь!</h2>
 {% endif %}
-{% endblock %}
+{% endblock %} -->
