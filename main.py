@@ -50,6 +50,13 @@ def allowed_file(filename):
         filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
+def send_to_telebot():
+    bot_token = 'Ваш_токен'
+    chat_id = 'Ваш_Chat_ID' # через поиск в Telegram: @getmyid_bot
+    message = 'Ваше сообщение'
+    requests.get(f'https://api.telegram.org/bot{bot_token}/sendMessage?chat_id={chat_id}&text={message}')
+
+
 @login_manager.user_loader
 def load_user(user_id):
     db_sess = db_session.create_session()
