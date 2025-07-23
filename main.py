@@ -51,8 +51,9 @@ def allowed_file(filename):
 
 
 def send_to_telebot():
-    bot_token = 'Ваш_токен'
-    chat_id = 'Ваш_Chat_ID' # через поиск в Telegram: @getmyid_bot
+    bot_token = '8095624904:AAEe-QN1OJdRwgYvl4H7Nkb-e_bSw3N83T8'
+    chat_id = '6113031827' # через поиск в Telegram: @getmyid_bot Your user ID: 6113031827 Current chat ID: 6113031827
+                        # token 8095624904:AAEe-QN1OJdRwgYvl4H7Nkb-e_bSw3N83T8
     message = 'Ваше сообщение'
     requests.get(f'https://api.telegram.org/bot{bot_token}/sendMessage?chat_id={chat_id}&text={message}')
 
