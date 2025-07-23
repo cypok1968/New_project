@@ -24,7 +24,8 @@ import requests
 from flask import Flask, url_for, request, render_template, redirect, abort, make_response, jsonify
 from werkzeug.utils import secure_filename
 
-from data import db_session, news_api
+from data import db_session, news_api, api_resources
+from flask_restful import Api
 from data.news import News
 from data.users import User
 from forms.loginform import LoginForm
@@ -33,6 +34,7 @@ from forms.user import Register
 from flask_login import LoginManager, login_user, logout_user, current_user, login_required
 
 app = Flask(__name__)
+api = Api(app)
 
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -420,6 +422,10 @@ def mail_send():
 if __name__ == '__main__':
     db_session.global_init('db/news.sqlite')
     app.register_blueprint(news_api.blueprint)
+    # Доступ к отдельной новости
+    api.add_resource(api_resources.NewsResource, '/api/v2/news/<int:news_id>')
+    # Доступ ко всем новостям
+    api.add_resource(api_resources.NewsResourceList, '/api/v2/news')
     app.run(host='127.0.0.1', port=5000, debug=debug)
 
     # db_sess = db_session.create_session()

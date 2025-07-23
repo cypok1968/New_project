@@ -60,7 +60,7 @@ class NewsResourceList(Resource):
         session = db_session.create_session()
         news = News(
             title=args['title'],
-            content=args['title'],
+            content=args['content'],
             user_id=args['user_id'],
             is_private=args['is_private'],
         )
