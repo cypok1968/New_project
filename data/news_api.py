@@ -65,3 +65,38 @@ def delete_news(news_id):
     db_sess.delete(news)
     db_sess.commit()
     return jsonify({'success': 'OK'})
+
+
+@blueprint.route('/api/news/<int:news_id>', methods=['PUT'])
+def update_news(news_id):
+    # Проверяем наличие JSON в запросе
+    if not request.json:
+        return make_response(jsonify({'error': 'Empty request'}), 400)
+
+    # Получаем сессию базы данных
+    db_sess = db_session.create_session()
+
+    # Ищем новость по ID
+    news = db_sess.query(News).filter(News.id == news_id).first()
+
+    # Если новость не найдена
+    if not news:
+        return make_response(jsonify({'error': 'News not found'}), 404)
+
+    # Обновляем поля, если они переданы в запросе
+    try:
+        if 'title' in request.json:
+            news.title = request.json['title']
+        if 'content' in request.json:
+            news.content = request.json['content']
+        if 'user_id' in request.json:
+            news.user_id = request.json['user_id']
+        if 'is_private' in request.json:
+            news.is_private = request.json['is_private']
+
+        db_sess.commit()
+        return jsonify({'success': True})
+
+    except Exception as e:
+        db_sess.rollback()
+        return make_response(jsonify({'error': str(e)}), 500)
