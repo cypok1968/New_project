@@ -4,7 +4,7 @@ import time
 # синхронный
 # def func():
 #     print('начинаем')
-#     time.sleep(5) # 5 секунд "спим" # ждём в синхронном режиме исполнения функции сна. лишь затем вывод на печать
+#     time.sleep(5) # 5 секунд "спим"
 #     print('завершаем')
 #
 # func()
@@ -17,6 +17,7 @@ import time
 #
 # asyncio.run(func2())
 
+# co-routine (корутина)
 async def say_hello():
     await asyncio.sleep(1)
     print('Привет')
@@ -26,9 +27,6 @@ async def say_goodbye():
     print('Пока')
 
 async def main():
-    await asyncio.gather(say_hello(), say_goodbye()) # вторая ассинхронная функция
-                                                     # не ждёт завершения исполнения
-                                                     # первой, а выполняется максимально одновременно (обе запускаются
-                                                     # параллельно и сразу)
+    await asyncio.gather(say_hello(), say_goodbye())
 
 asyncio.run(main())
